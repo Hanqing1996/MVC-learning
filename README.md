@@ -166,25 +166,22 @@ $Http.get(fn) // 在 fn 后会调用 render,check 哪些地方进行了更新，
     * Vue 3 计划使用 proxy，只要 this.user.age = 20 即可响应新增属性
     ```
     var data={
-        name:'libai'
+    name:'libai'
     }
     // dataProxy 就是 data 的代理
     var dataProxy=new Proxy(data,{
         get(target,key){
             return data[key]
-        }
+        },
         set(target,key,value){
-            if(key in data){
-                data[key]=value
-                console.log('更新 UI')
-            }
+            data[key]=value
         }
     })
-    ```
-    ```
+
     console.log(dataProxy.name) // 'libai'
     dataProxy.name='jack' // 更新 name
-    dataProxy.age=12 // 新增属性 age,也可被响应
+    dataProxy.age=12 // 新增属性 age
+    console.log(dataProxy.age) // 12
     ```
 
 
